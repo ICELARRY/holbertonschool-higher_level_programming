@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 # 5-variable_load.py
 # Script to import the variable a from variable_load_5.py
 
