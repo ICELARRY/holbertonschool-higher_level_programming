@@ -1,10 +1,13 @@
-====================
+========================================
 0-add_integer module
-====================
+========================================
 
-Using add_integer:
+Using the function add_integer:
 
->>> add_integer = __import__("0-add_integer").add_integer
+>>> add_integer = __import__('0-add_integer').add_integer
+
+Normal cases
+------------
 
 >>> add_integer(1, 2)
 3
@@ -15,8 +18,17 @@ Using add_integer:
 >>> add_integer(2)
 100
 
+Float cases
+-----------
+
 >>> add_integer(100.3, -2)
 98
+
+>>> add_integer(3.7, 2)
+5
+
+Error cases
+-----------
 
 >>> add_integer(4, "School")
 Traceback (most recent call last):
