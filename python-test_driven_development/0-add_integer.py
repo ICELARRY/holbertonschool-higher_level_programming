@@ -9,14 +9,11 @@ def add_integer(a, b=98):
     Add two integers.
 
     a and b must be integers or floats.
-    Floats are cast to integers before addition.
-
-    Raises:
-        TypeError: if a or b is not an integer or float
+    Floats are cast to integers.
     """
-    if not isinstance(a, (int, float)):
+    if type(a) not in (int, float):
         raise TypeError("a must be an integer")
-    if not isinstance(b, (int, float)):
+    if type(b) not in (int, float):
         raise TypeError("b must be an integer")
 
     return int(a) + int(b)
