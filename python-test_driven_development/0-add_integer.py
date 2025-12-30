@@ -23,17 +23,24 @@ def add_integer(a, b=98):
 
     Raises:
         TypeError: If a or b is not an integer or float.
-        TypeError: If a or b is a float representing NaN or infinity.
+        TypeError: If a or b is NaN or infinity.
     """
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
 
-    # Check for NaN or infinity (to pass float overflow test)
-    if isinstance(a, float) and (a != a or abs(a) == float('inf')):
+    # NaN yoxlaması (NaN == NaN həmişə False olur)
+    if a != a:
         raise TypeError("a must be an integer")
-    if isinstance(b, float) and (b != b or abs(b) == float('inf')):
+    if b != b:
+        raise TypeError("b must be an integer")
+
+    # +inf və -inf yoxlaması
+    import math
+    if math.isinf(a):
+        raise TypeError("a must be an integer")
+    if math.isinf(b):
         raise TypeError("b must be an integer")
 
     return int(a) + int(b)
