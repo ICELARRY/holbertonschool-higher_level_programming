@@ -30,13 +30,13 @@ def add_integer(a, b=98):
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
 
-    # NaN yoxlaması (NaN == NaN həmişə False olur)
+    # NaN yoxlaması (xüsusi: yalnız NaN üçün True olur)
     if a != a:
         raise TypeError("a must be an integer")
     if b != b:
         raise TypeError("b must be an integer")
 
-    # +inf və -inf yoxlaması
+    # Infinity yoxlaması (math import edirik - bu taskda icazəlidir)
     import math
     if math.isinf(a):
         raise TypeError("a must be an integer")
