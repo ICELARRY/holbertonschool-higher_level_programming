@@ -1,4 +1,3 @@
-cat > 0-main.py << EOF
 #!/usr/bin/python3
 add_integer = __import__('0-add_integer').add_integer
 
@@ -14,4 +13,3 @@ try:
     print(add_integer(None))
 except Exception as e:
     print(e)
-EOF
