@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Module defining a Rectangle class with print_symbol and instance counting."""
+"""
+Module defining a Rectangle class with print_symbol
+and instance counting.
+"""
 
 
 class Rectangle:
@@ -56,14 +59,16 @@ class Rectangle:
         """Return a string representation using print_symbol."""
         if self.width == 0 or self.height == 0:
             return ""
-        # Use str(self.print_symbol) for single value, else repr for other types
         symbol = str(self.print_symbol)
-        lines = [symbol * self.width for _ in range(self.height)]
-        return "\n".join(lines)
+        rect_lines = []
+        for _ in range(self.height):
+            rect_lines.append(symbol * self.width)
+        return "\n".join(rect_lines)
 
     def __repr__(self):
         """Return a string to recreate a new instance."""
-        return "Rectangle({}, {})".format(self.width, self.height)
+        repr_str = "Rectangle({}, {})".format(self.width, self.height)
+        return repr_str
 
     def __del__(self):
         """Print a message when an instance is deleted and decrement counter."""
