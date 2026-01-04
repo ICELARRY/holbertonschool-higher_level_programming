@@ -63,7 +63,8 @@ class Rectangle:
         rect_lines = []
         for _ in range(self.height):
             rect_lines.append(symbol * self.width)
-        return "\n".join(rect_lines)
+        rect_string = "\n".join(rect_lines)
+        return rect_string
 
     def __repr__(self):
         """Return a string to recreate a new instance."""
