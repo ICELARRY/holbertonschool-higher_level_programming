@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Module that defines a Rectangle class with instance tracking"""
+
 
 class Rectangle:
     """A class that defines a rectangle"""
