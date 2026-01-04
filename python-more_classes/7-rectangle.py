@@ -1,5 +1,8 @@
 #!/usr/bin/python3
+
+
 """Module defining the Rectangle class."""
+
 
 class Rectangle:
     """A class that defines a rectangle."""
@@ -52,12 +55,14 @@ class Rectangle:
         return 2 * (self.width + self.height)
 
     def __str__(self):
-        """Return the string representation of the rectangle using print_symbol."""
+        """
+        Return the string representation of the rectangle using print_symbol.
+        """
         if self.width == 0 or self.height == 0:
             return ""
         symbol_str = str(self.print_symbol)
         row = symbol_str * self.width
-        return "\n".join(row for _ in range(self.height))
+        return "\n".join([row] * self.height)
 
     def __repr__(self):
         """Return a string representation that can recreate the instance."""
