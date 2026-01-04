@@ -55,11 +55,12 @@ class Rectangle:
         """Return a string representation using '#' characters."""
         if self.width == 0 or self.height == 0:
             return ""
-        return "\n".join(["#" * self.width for _ in range(self.height)])
+        rect_lines = ["#" * self.width for _ in range(self.height)]
+        return "\n".join(rect_lines)
 
     def __repr__(self):
         """Return a string to recreate a new instance."""
-        return f"Rectangle({self.width}, {self.height})"
+        return "Rectangle({}, {})".format(self.width, self.height)
 
     def __del__(self):
         """Print a message when an instance is deleted and decrement counter."""
