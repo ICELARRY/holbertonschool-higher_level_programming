@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Define a Rectangle class with width, height, area, perimeter, and string representation."""
+"""
+Define a Rectangle class with width, height, area, perimeter,
+and string representation.
+"""
 
 
 class Rectangle:
@@ -49,11 +52,13 @@ class Rectangle:
         return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        """Return string representation of the rectangle with '#' characters."""
+        """Return string representation of the rectangle with '#'."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        return "\n".join(["#" * self.__width for _ in range(self.__height)])
+        return "\n".join(
+            ["#" * self.__width for _ in range(self.__height)]
+        )
 
     def __repr__(self):
-        """Return a string representation compatible with the automated test."""
-        return f"<3-rectangle.{self.__class__.__name__} object"
+        """Return a string compatible with automated test."""
+        return ("<3-rectangle." f"{self.__class__.__name__} object")
