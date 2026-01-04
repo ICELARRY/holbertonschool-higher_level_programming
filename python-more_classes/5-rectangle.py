@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""Module defining a Rectangle class with width and height."""
+"""Module defining a Rectangle class."""
+
 
 class Rectangle:
-    """Defines a rectangle."""
+    """Defines a rectangle with width and height."""
 
     def __init__(self, width=0, height=0):
         """Initialize rectangle with optional width and height."""
