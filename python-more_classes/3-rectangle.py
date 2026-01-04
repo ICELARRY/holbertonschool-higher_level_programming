@@ -55,5 +55,6 @@ class Rectangle:
         return "\n".join(["#" * self.__width for _ in range(self.__height)])
 
     def __repr__(self):
-        """Return a string representation for recreating the object."""
-        return f"<{self.__class__.__name__} object at {hex(id(self))}>"
+        """Return a simple representation of the Rectangle object for testing."""
+        return f"<{self.__class__.__name__} object>"
+
