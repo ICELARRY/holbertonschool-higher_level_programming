@@ -1,75 +1,65 @@
 #!/usr/bin/python3
-"""Module that defines a Rectangle class"""
+
+
+"""Module defining the Rectangle class."""
+
 
 class Rectangle:
-    """Defines a rectangle with width and height"""
+    """A class that defines a rectangle."""
 
-    # Public class attributes
     number_of_instances = 0
     print_symbol = "#"
 
     def __init__(self, width=0, height=0):
-        """Initialize a new Rectangle instance"""
+        """Initialize the rectangle with optional width and height."""
         self.width = width
         self.height = height
         Rectangle.number_of_instances += 1
 
     @property
     def width(self):
-        """Getter for width"""
-        return self.__width
+        """Retrieve the width."""
+        return self._width
 
     @width.setter
     def width(self, value):
-        """Setter for width with type and value checks"""
+        """Set the width with validation."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
             raise ValueError("width must be >= 0")
-        self.__width = value
+        self._width = value
 
     @property
     def height(self):
-        """Getter for height"""
-        return self.__height
+        """Retrieve the height."""
+        return self._height
 
     @height.setter
     def height(self, value):
-        """Setter for height with type and value checks"""
+        """Set the height with validation."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
             raise ValueError("height must be >= 0")
-        self.__height = value
+        self._height = value
 
     def area(self):
-        """Returns the area of the rectangle"""
+        """Return the area of the rectangle."""
         return self.width * self.height
 
     def perimeter(self):
-        """Returns the perimeter of the rectangle"""
+        """Return the perimeter of the rectangle."""
         if self.width == 0 or self.height == 0:
             return 0
         return 2 * (self.width + self.height)
 
-    def __str__(self):
-        """Returns a string representation of the rectangle using print_symbol"""
-        if self.width == 0 or self.height == 0:
-            return ""
-        return "\n".join(str(self.print_symbol) * self.width for _ in range(self.height))
-
-    def __repr__(self):
-        """Returns a string to recreate a new instance with eval()"""
-        return f"Rectangle({self.width}, {self.height})"
-
-    def __del__(self):
-        """Prints a message when an instance is deleted"""
-        print("Bye rectangle...")
-        Rectangle.number_of_instances -= 1
-
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
-        """Returns the rectangle with the bigger area"""
+        """
+        Return the biggest rectangle based on the area.
+        Return rect_1 if both have the same area.
+        """
         if not isinstance(rect_1, Rectangle):
             raise TypeError("rect_1 must be an instance of Rectangle")
         if not isinstance(rect_2, Rectangle):
@@ -80,5 +70,26 @@ class Rectangle:
 
     @classmethod
     def square(cls, size=0):
-        """Returns a new Rectangle instance with width == height == size"""
+        """
+        Return a new Rectangle instance with width == height == size.
+        """
         return cls(size, size)
+
+    def __str__(self):
+        """
+        Return the string representation of the rectangle using print_symbol.
+        """
+        if self.width == 0 or self.height == 0:
+            return ""
+        symbol_str = str(self.print_symbol)
+        row = symbol_str * self.width
+        return "\n".join([row] * self.height)
+
+    def __repr__(self):
+        """Return a string representation that can recreate the instance."""
+        return f"Rectangle({self.width}, {self.height})"
+
+    def __del__(self):
+        """Print a message and decrement the instance count on deletion."""
+        Rectangle.number_of_instances -= 1
+        print("Bye rectangle...")
