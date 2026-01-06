@@ -1,16 +1,15 @@
 #!/usr/bin/python3
-"""Module containing the lookup function to return available attributes
-and methods of an object.
-"""
+"""Module containing a function to check exact class match."""
 
 
-def lookup(obj):
-    """Return a list of available attributes and methods of an object.
+def is_same_class(obj, a_class):
+    """Return True if obj is exactly an instance of a_class, else False.
 
     Args:
-        obj: The object to inspect.
+        obj: The object to check.
+        a_class: The class to match against.
 
     Returns:
-        list: List of attribute and method names.
+        bool: True if type(obj) is exactly a_class, False otherwise.
     """
-    return dir(obj)
+    return type(obj) == a_class
