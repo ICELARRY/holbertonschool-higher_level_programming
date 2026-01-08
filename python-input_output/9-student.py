@@ -4,6 +4,7 @@
 Defines a Student class with a to_json method
 """
 
+
 class Student:
     """Defines a student with first_name, last_name, and age"""
 
