@@ -1,37 +1,40 @@
-#!/usr/bin/env python3
 import http.server
 import json
 
-PORT = 8000
-
-class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
-
-    def _set_headers(self, code, content_type="text/html"):
-        self.send_response(code)
-        self.send_header("Content-type", content_type)
-        self.end_headers()
-
+class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/":
-            self._set_headers(200)
+        if self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
             self.wfile.write(b"Hello, this is a simple API!")
-        elif self.path == "/data":
-            self._set_headers(200, "application/json")
+        elif self.path == '/data':
             data = {"name": "John", "age": 30, "city": "New York"}
-            self.wfile.write(json.dumps(data).encode())
-        elif self.path == "/status":
-            self._set_headers(200, "application/json")
-            self.wfile.write(json.dumps({"message": "OK"}).encode())
+            json_data = json.dumps(data)
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json_data.encode('utf-8'))
+        elif self.path == '/status':
+            self.send_response(200)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b"OK")
+        elif self.path == '/info':
+            info = {"version": "1.0", "description": "A simple API built with http.server"}
+            json_info = json.dumps(info)
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json_info.encode('utf-8'))
         else:
-            self._set_headers(404, "application/json")
-            self.wfile.write(json.dumps({"message": "Endpoint not found"}).encode())
+            self.send_response(404)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b"Endpoint not found")
 
 if __name__ == "__main__":
-    print(f"Starting server on port {PORT}...")
-    server_address = ('', PORT)
-    httpd = http.server.HTTPServer(server_address, SimpleHTTPRequestHandler)
-    try:
+    PORT = 8000
+    with http.server.HTTPServer(("", PORT), SimpleAPIHandler) as httpd:
+        print(f"Server running on port {PORT}")
         httpd.serve_forever()
-    except KeyboardInterrupt:
-        print("\nServer stopped by user")
-        httpd.server_close()
