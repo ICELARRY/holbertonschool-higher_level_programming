@@ -2,60 +2,30 @@
 import requests
 import csv
 
-
 def fetch_and_print_posts():
-    """
-    Fetch all posts from JSONPlaceholder and print their titles.
-    """
     url = "https://jsonplaceholder.typicode.com/posts"
-
     try:
         response = requests.get(url)
         print(f"Status Code: {response.status_code}")
-
         if response.status_code == 200:
-            posts = response.json()
-            for post in posts:
-                print(post.get("title"))
-        else:
-            print("Failed to fetch posts.")
-
+            for post in response.json():
+                print(post["title"])
     except requests.RequestException as e:
-        print(f"An error occurred: {e}")
-
+        print(f"Error: {e}")
 
 def fetch_and_save_posts():
-    """
-    Fetch all posts from JSONPlaceholder and save them to posts.csv.
-    Each post is a dictionary with keys: id, title, body.
-    """
     url = "https://jsonplaceholder.typicode.com/posts"
-
     try:
         response = requests.get(url)
-
         if response.status_code != 200:
-            print(f"Failed to fetch posts. Status Code: {response.status_code}")
+            print(f"Failed, Status Code: {response.status_code}")
             return False
-
-        posts = response.json()
-        data_to_save = [
-            {"id": post["id"], "title": post["title"], "body": post["body"]}
-            for post in posts
-        ]
-
-        with open("posts.csv", "w", newline="", encoding="utf-8") as csvfile:
-            fieldnames = ["id", "title", "body"]
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        posts = [{"id": p["id"], "title": p["title"], "body": p["body"]} for p in response.json()]
+        with open("posts.csv", "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=["id","title","body"])
             writer.writeheader()
-            writer.writerows(data_to_save)
-
+            writer.writerows(posts)
         return True
-
-    except requests.RequestException as e:
-        print(f"An error occurred: {e}")
-        return False
-
-    except (OSError, csv.Error) as e:
-        print(f"File write error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
         return False

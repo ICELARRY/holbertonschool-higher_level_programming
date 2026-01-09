@@ -1,0 +1,4 @@
+restful-api/
+├── task_02_requests.py       # JSONPlaceholder fetch + CSV
+├── task_03_http_server.py    # Simple API server
+├── main_02_requests.py       # Requests task üçün test faylı
