@@ -6,7 +6,6 @@ PORT = 8000
 
 class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
     def _set_headers(self, code=200, ctype="text/plain"):
-        # code həmişə integer olmalıdır
         self.send_response(code)
         self.send_header("Content-type", ctype)
         self.end_headers()
@@ -21,12 +20,12 @@ class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(data).encode())
         elif self.path == "/status":
             self._set_headers(200, "application/json")
-            status = {"status": "OK"}
-            self.wfile.write(json.dumps(status).encode())
+            # Test uyğun key "message" olmalıdır
+            self.wfile.write(json.dumps({"message": "OK"}).encode())
         else:
             self._set_headers(404, "application/json")
-            error = {"error": "Endpoint not found"}
-            self.wfile.write(json.dumps(error).encode())
+            # Test uyğun key "message" olmalıdır
+            self.wfile.write(json.dumps({"message": "Endpoint not found"}).encode())
 
 def run():
     server = http.server.HTTPServer(("", PORT), SimpleAPIHandler)
