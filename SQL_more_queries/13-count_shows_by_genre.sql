@@ -1,3 +1,8 @@
+-- 13. Number of shows by genre
+-- Lists all genres and counts how many shows are linked to each
+-- Output columns: genre, number_of_shows
+-- Sorted by number_of_shows in descending order
+
 SELECT
   CASE genre_id
     WHEN 1 THEN 'Drama'
