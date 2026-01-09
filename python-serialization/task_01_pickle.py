@@ -14,28 +14,22 @@ class CustomObject:
         print(f"Is Student: {self.is_student}")
 
     def serialize(self, filename):
-        """
-        Serialize the current object instance to a file using pickle.
-        Returns None if an error occurs.
-        """
         try:
             with open(filename, "wb") as file:
                 pickle.dump(self, file)
-        except (FileNotFoundError, PermissionError, pickle.PickleError, OSError):
+        except (FileNotFoundError, PermissionError,
+                pickle.PickleError, OSError):
             return None
 
     @classmethod
     def deserialize(cls, filename):
-        """
-        Deserialize a CustomObject instance from a file using pickle.
-        Returns None if an error occurs.
-        """
         try:
             with open(filename, "rb") as file:
                 obj = pickle.load(file)
                 if isinstance(obj, cls):
                     return obj
-        except (FileNotFoundError, PermissionError, pickle.UnpicklingError, OSError):
+        except (FileNotFoundError, PermissionError,
+                pickle.UnpicklingError, EOFError, OSError):
             return None
 
         return None
