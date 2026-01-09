@@ -6,6 +6,7 @@ PORT = 8000
 
 class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
     def _set_headers(self, code=200, ctype="text/plain"):
+        # code həmişə integer olmalıdır
         self.send_response(code)
         self.send_header("Content-type", ctype)
         self.end_headers()
@@ -15,14 +16,17 @@ class SimpleAPIHandler(http.server.BaseHTTPRequestHandler):
             self._set_headers()
             self.wfile.write(b"Hello, this is a simple API!")
         elif self.path == "/data":
-            self._set_headers("200", "application/json")
-            self.wfile.write(json.dumps({"name":"John","age":30,"city":"New York"}).encode())
+            self._set_headers(200, "application/json")
+            data = {"name": "John", "age": 30, "city": "New York"}
+            self.wfile.write(json.dumps(data).encode())
         elif self.path == "/status":
-            self._set_headers("200","application/json")
-            self.wfile.write(json.dumps({"status":"OK"}).encode())
+            self._set_headers(200, "application/json")
+            status = {"status": "OK"}
+            self.wfile.write(json.dumps(status).encode())
         else:
-            self._set_headers(404,"application/json")
-            self.wfile.write(json.dumps({"error":"Endpoint not found"}).encode())
+            self._set_headers(404, "application/json")
+            error = {"error": "Endpoint not found"}
+            self.wfile.write(json.dumps(error).encode())
 
 def run():
     server = http.server.HTTPServer(("", PORT), SimpleAPIHandler)
@@ -30,7 +34,7 @@ def run():
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\nServer stopped")
+        print("\nServer stopped by user")
     finally:
         server.server_close()
 
