@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Script that lists all states from the database hbtn_0e_0_usa
-where the state name matches the argument passed.
+where the state name matches the argument passed (case-sensitive).
 Usage: ./2-my_filter_states.py <username> <password> <database> <state_name>
 """
 
@@ -10,7 +10,7 @@ import sys
 
 
 def main():
-    """Main function to connect to the database and filter states."""
+    """Connect to MySQL and display states matching the argument."""
     if len(sys.argv) != 5:
         return
 
@@ -24,14 +24,14 @@ def main():
                          user=user, passwd=password, db=db_name)
     cursor = db.cursor()
 
-    # Prepare SQL query
+    # SQL query with case-sensitive comparison
     sql = ("SELECT * FROM states "
-           "WHERE name = '{}' "
+           "WHERE BINARY name = '{}' "
            "ORDER BY id ASC").format(state_name)
 
     cursor.execute(sql)
 
-    # Fetch and display results
+    # Display results
     rows = cursor.fetchall()
     for row in rows:
         print(row)
