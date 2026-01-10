@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Lists all State objects from the database hbtn_0e_6_usa
-Usage: ./7-model_state_fetch_all.py <username> <password> <database>
+Script that lists all State objects from the database hbtn_0e_6_usa
+using SQLAlchemy.
 """
 
 import sys
@@ -9,29 +9,34 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
-if __name__ == "__main__":
+
+def main():
+    """Main function to list all State objects from the database"""
     if len(sys.argv) != 4:
-        print("Usage: ./7-model_state_fetch_all.py <username> <password> <database>")
+        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
         sys.exit(1)
 
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
+    user, password, db = sys.argv[1], sys.argv[2], sys.argv[3]
 
-    # Create engine (PEP8-compliant)
+    # Connect to MySQL database
     engine = create_engine(
-        f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}"
+        "mysql+mysqldb://{}:{}@localhost/{}".format(user, password, db),
+        pool_pre_ping=True
     )
 
-    # Bind session to engine
+    # Create a configured "Session" class
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Query all states sorted by id
+    # Query all State objects and order by id
     states = session.query(State).order_by(State.id).all()
 
+    # Print results
     for state in states:
         print(f"{state.id}: {state.name}")
 
-    # Close session
     session.close()
+
+
+if __name__ == "__main__":
+    main()
