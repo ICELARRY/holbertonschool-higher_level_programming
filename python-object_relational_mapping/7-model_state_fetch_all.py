@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """
-Lists all State objects from the database hbtn_0e_6_usa
+Lists all State objects from the database hbtn_0e_6_usa.
 Usage: ./7-model_state_fetch_all.py <username> <password> <database>
 """
+
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -18,7 +19,9 @@ if __name__ == "__main__":
     database = sys.argv[3]
 
     # Create engine
-    engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}")
+    engine = create_engine(
+        f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}"
+    )
 
     # Bind session to engine
     Session = sessionmaker(bind=engine)
