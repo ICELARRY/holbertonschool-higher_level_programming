@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all State objects from the database hbtn_0e_6_usa.
+Lists all State objects from the database hbtn_0e_6_usa
 Usage: ./7-model_state_fetch_all.py <username> <password> <database>
 """
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     password = sys.argv[2]
     database = sys.argv[3]
 
-    # Create engine
+    # Create engine (PEP8-compliant)
     engine = create_engine(
         f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}"
     )
