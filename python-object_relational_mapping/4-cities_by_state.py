@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Lists all cities from the database hbtn_0e_4_usa
+sorted by cities.id in ascending order
+"""
 import MySQLdb
 import sys
 
@@ -36,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
